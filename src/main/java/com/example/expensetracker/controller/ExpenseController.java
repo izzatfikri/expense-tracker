@@ -69,4 +69,14 @@ public class ExpenseController {
         return "redirect:/";
     }
 
+    @GetMapping("/about")
+    public String showAboutPage() {
+        return "about";
+    }
+
+    // @GetMapping("/add-expense")
+    // public String showAddExpense() {
+    //     return "add-expense";
+    // }
+
 }
