@@ -1,7 +1,9 @@
 package com.example.expensetracker.controller;
 
 import com.example.expensetracker.model.Expense;
+import com.example.expensetracker.model.User;
 import com.example.expensetracker.service.ExpenseService;
+import com.example.expensetracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ public class ExpenseController {
     // Handle Http and return view
     @Autowired
     private ExpenseService expenseService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
@@ -78,5 +83,25 @@ public class ExpenseController {
     // public String showAddExpense() {
     //     return "add-expense";
     // }
+
+
+
+    @GetMapping("/login")
+    public String showLoginPage()
+    {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("user") User user) {
+        userService.registerNewUser(user);
+        return "redirect:/login?registered";
+    }
 
 }

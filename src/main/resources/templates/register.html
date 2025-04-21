@@ -1,162 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register | Expense Tracker</title>
+    <title>Register - Expense Tracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-            display: flex;
-            min-height: 100vh;
-            align-items: center;
-        }
-        
-        .auth-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
-            margin: 0 auto;
-        }
-        
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .auth-header i {
-            background-color: var(--primary-color);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .form-control {
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-auth {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 0.75rem;
-            font-weight: 500;
-            width: 100%;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-auth:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .auth-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        
-        .password-match {
-            display: none;
-            color: green;
-            font-size: 0.875rem;
-        }
-        
-        .password-mismatch {
-            display: none;
-            color: red;
-            font-size: 0.875rem;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <i class="fas fa-user-plus"></i>
-                <h2>Create Account</h2>
-                <p class="text-muted">Get started with your expense tracking</p>
-            </div>
-            
-            <form th:action="@{/register}" method="post" id="registerForm">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" required>
-                    <div class="password-match mt-1">
-                        <i class="fas fa-check-circle me-1"></i> Passwords match
-                    </div>
-                    <div class="password-mismatch mt-1">
-                        <i class="fas fa-times-circle me-1"></i> Passwords don't match
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-auth mb-3" id="submitBtn" disabled>
-                    <i class="fas fa-user-plus me-2"></i> Register
-                </button>
-                
-                <div class="auth-footer">
-                    <p class="text-muted">Already have an account? <a href="/login">Login</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const password = document.getElementById('password');
-            const confirmPassword = document.getElementById('confirmPassword');
-            const submitBtn = document.getElementById('submitBtn');
-            const matchMessage = document.querySelector('.password-match');
-            const mismatchMessage = document.querySelector('.password-mismatch');
-            
-            function validatePasswords() {
-                if (password.value && confirmPassword.value) {
-                    if (password.value === confirmPassword.value) {
-                        matchMessage.style.display = 'block';
-                        mismatchMessage.style.display = 'none';
-                        submitBtn.disabled = false;
-                    } else {
-                        matchMessage.style.display = 'none';
-                        mismatchMessage.style.display = 'block';
-                        submitBtn.disabled = true;
-                    }
-                } else {
-                    matchMessage.style.display = 'none';
-                    mismatchMessage.style.display = 'none';
-                    submitBtn.disabled = true;
-                }
-            }
-            
-            password.addEventListener('input', validatePasswords);
-            confirmPassword.addEventListener('input', validatePasswords);
-        });
-    </script>
+<h1>Register Page</h1>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+                <label for="username" class="form-label">Username</label>
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Choose a username" required>
+                <label for="password" class="form-label">Password</label>
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Create a password" required>
+                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        </form>
+        <a href="/login" class="login-link">Already have an account? Sign in</a>
 </body>
 </html>

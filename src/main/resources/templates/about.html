@@ -117,7 +117,13 @@
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> My Account</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post" class="dropdown-item">
+                                <button type="submit" style="outline: none; border: none; background: none; padding: 0;">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 
@@ -158,7 +164,7 @@
                     <div class="developer-card p-3 h-100">
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                <i class="fas fa-user"></i>
+                                <img src="/images/ejat.jpg" alt="Profile Image" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
                             <div class="ms-3">
                                 <h5 class="mb-0">Muhammad Izzat Fikri</h5>
@@ -174,7 +180,7 @@
                     <div class="developer-card p-3 h-100">
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-user"></i> <!--Add your images here-->
                             </div>
                             <div class="ms-3">
                                 <h5 class="mb-0">Muhammad Izzat Syahmi</h5>
