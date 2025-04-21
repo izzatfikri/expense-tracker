@@ -79,12 +79,6 @@ public class ExpenseController {
         return "about";
     }
 
-    // @GetMapping("/add-expense")
-    // public String showAddExpense() {
-    //     return "add-expense";
-    // }
-
-
 
     @GetMapping("/login")
     public String showLoginPage()
