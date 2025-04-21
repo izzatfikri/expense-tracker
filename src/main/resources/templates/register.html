@@ -1,20 +1,164 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register - Expense Tracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --light-gray: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+        }
+        
+        .register-container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .register-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .brand-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .brand-header .logo {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-header .logo i {
+            margin-right: 10px;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .register-header i {
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn-register {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-weight: 500;
+            width: 100%;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-register:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .register-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6c757d;
+        }
+        
+        .register-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .register-footer a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>Register Page</h1>
-        <form th:action="@{/register}" th:object="${user}" method="post">
-                <label for="username" class="form-label">Username</label>
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Choose a username" required>
-                <label for="password" class="form-label">Password</label>
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Create a password" required>
-                <button type="submit" class="btn btn-primary btn-lg">Register</button>
-        </form>
-        <a href="/login" class="login-link">Already have an account? Sign in</a>
+    <div class="register-container">
+        <div class="register-card">
+            <!-- Brand Header -->
+            <div class="brand-header">
+                <div class="logo">
+                    <i class="fas fa-wallet"></i>Expense Tracker
+                </div>
+                <p class="text-muted">Track your finances effortlessly</p>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="register-header">
+                <!-- <i class="fas fa-user-plus"></i> -->
+                <h3>Create an Account</h3>
+            </div>
+            
+            <form th:action="@{/register}" th:object="${user}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" th:field="*{username}" class="form-control" 
+                           placeholder="Choose a username" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-control" 
+                           placeholder="Create a password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-register mb-3">
+                    <i class="fas fa-user-plus me-2"></i> Register
+                </button>
+                
+                <div class="register-footer">
+                    <p>Already have an account? <a href="/login">Sign in here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
