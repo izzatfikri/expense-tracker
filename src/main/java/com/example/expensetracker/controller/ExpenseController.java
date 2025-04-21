@@ -26,7 +26,7 @@ public class ExpenseController {
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
-        List<Expense> expenses = expenseService.getAllExpenses();
+        List<Expense> expenses = expenseService.getCurrentUserExpenses();
         // Total amount
         BigDecimal totalAmount = expenses.stream()
                 .map(expense -> expense.getAmount() != null ? expense.getAmount() : BigDecimal.ZERO)

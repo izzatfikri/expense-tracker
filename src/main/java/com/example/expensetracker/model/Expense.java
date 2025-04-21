@@ -19,7 +19,7 @@ public class Expense {
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    private User getUser() {
+    public User getUser() {
         return user;
     }
 
