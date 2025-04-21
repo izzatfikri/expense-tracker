@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register - Expense Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1>Register Page</h1>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+                <label for="username" class="form-label">Username</label>
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Choose a username" required>
+                <label for="password" class="form-label">Password</label>
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Create a password" required>
+                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        </form>
+        <a href="/login" class="login-link">Already have an account? Sign in</a>
+</body>
+</html>

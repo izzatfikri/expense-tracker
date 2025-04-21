@@ -1,9 +1,6 @@
 package com.example.expensetracker.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -17,6 +14,18 @@ public class Expense {
     private String description;
 
     private BigDecimal amount;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+
+    private User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
