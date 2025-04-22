@@ -18,6 +18,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = true)
+    private Double monthly_budget;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
@@ -51,5 +54,13 @@ public class User {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public Double getMonthly_budget() {
+        return monthly_budget;
+    }
+
+    public void setMonthly_budget(Double monthly_budget) {
+        this.monthly_budget = monthly_budget;
     }
 }

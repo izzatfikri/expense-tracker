@@ -15,6 +15,9 @@ public class Expense {
 
     private BigDecimal amount;
 
+    @Column(nullable = true)
+    private String category;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
@@ -50,4 +53,8 @@ public class Expense {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) { this.category = category; }
 }
