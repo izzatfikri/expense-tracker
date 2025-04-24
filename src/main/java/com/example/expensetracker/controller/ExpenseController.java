@@ -98,13 +98,13 @@ public class ExpenseController {
 
 
     // Test to update monthly budget
-    // @PostMapping("/updateBudget")
-    // public String updateBudget(@RequestParam("monthly_budget") Double monthly_budget) {
-    //     User currentUser = userService.findByUsername(
-    //             SecurityContextHolder.getContext().getAuthentication().getName());
-    //     userService.updateMonthlyBudget(currentUser.getId(), monthly_budget);
-    //     return "redirect:/";
-    // }
+    @PostMapping("/updateBudget")
+    public String updateBudget(@RequestParam("monthly_budget") Double monthly_budget) {
+        User currentUser = userService.findByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+        userService.updateMonthlyBudget(currentUser.getId(), monthly_budget);
+        return "redirect:/";
+    }
 
     @GetMapping("/profile")
     public String showProfilePage(Model model) {

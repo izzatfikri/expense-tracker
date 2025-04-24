@@ -175,6 +175,7 @@
                 <thead>
                     <tr>
                         <th>Description</th>
+                        <th>Category</th>
                         <th>Amount</th>
                         <th>Actions</th>
                     </tr>
@@ -182,6 +183,7 @@
                 <tbody>
                     <tr th:each="expense : ${expenses}">
                         <td th:text="${expense.description}">Description</td>
+                        <td th:text="${expense.category}">Category</td>
                         <td th:text="'$' + ${expense.amount}">Amount</td>
                         <td>
                             <a class="btn btn-primary btn-sm action-btn me-1" th:href="@{/editExpense/{id}(id=${expense.id})}" title="Edit">

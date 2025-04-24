@@ -221,7 +221,15 @@
                     <input type="text" id="description" name="description" th:field="*{description}" 
                            class="form-control" placeholder="Enter expense description" required>
                 </div>
-                
+                <div class="mb-4">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" name="category" th:field="*{category}" class="form-control" required>
+                        <option value="" disabled>Select a category</option>
+                        <option value="Food" th:selected="*{category == 'Food'}">Food</option>
+                        <option value="Transport" th:selected="*{category == 'Transport'}">Transport</option>
+                        <option value="Other" th:selected="*{category == 'Other'}">Other</option>
+                    </select>
+                </div>
                 <div class="mb-4">
                     <label for="amount" class="form-label">Amount</label>
                     <div class="input-group">
