@@ -98,4 +98,6 @@ public class ExpenseController {
         return "redirect:/login?registered";
     }
 
+    
+
 }
