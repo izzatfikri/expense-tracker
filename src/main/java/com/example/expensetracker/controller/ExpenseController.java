@@ -109,8 +109,11 @@ public class ExpenseController {
     @GetMapping("/profile")
     public String showProfilePage(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("user", userService.findByUsername(username));
+        User user = userService.findByUsername(username);
+        model.addAttribute("user", user);
         model.addAttribute("username", username);
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("monthly_budget", user.getMonthly_budget());
         return "profile";
     }
 
