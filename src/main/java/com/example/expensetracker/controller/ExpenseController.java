@@ -62,6 +62,7 @@ public class ExpenseController {
         Expense existingExpense = expenseService.getExpenseById(id);
         existingExpense.setDescription(expense.getDescription());
         existingExpense.setAmount(expense.getAmount());
+        existingExpense.setCategory(expense.getCategory());
         expenseService.saveExpense(existingExpense);
         return "redirect:/";
     }
@@ -76,7 +77,6 @@ public class ExpenseController {
     public String showAboutPage() {
         return "about";
     }
-
 
     @GetMapping("/login")
     public String showLoginPage()
