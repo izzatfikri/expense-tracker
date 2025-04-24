@@ -23,4 +23,11 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public User updateMonthlyBudget(Long userId, Double monthly_budget) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setMonthly_budget(monthly_budget);
+        return userRepository.save(user);
+    }
 }
