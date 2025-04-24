@@ -110,6 +110,7 @@ public class ExpenseController {
     public String showProfilePage(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByUsername(username));
+        model.addAttribute("username", username);
         return "profile";
     }
 
