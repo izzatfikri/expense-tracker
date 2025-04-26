@@ -30,8 +30,13 @@ public class ExpenseController {
                 .map(expense -> expense.getAmount() != null ? expense.getAmount() : BigDecimal.ZERO)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        User currentUser = userService.findByUsername(
+                        SecurityContextHolder.getContext().getAuthentication().getName());
+                model.addAttribute("monthly_budget", currentUser.getMonthly_budget());
+
         model.addAttribute("expenses", expenses);
         model.addAttribute("totalAmount", totalAmount);
+        ;
 
         return "index";
 
