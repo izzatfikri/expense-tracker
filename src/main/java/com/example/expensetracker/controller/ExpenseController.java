@@ -36,7 +36,9 @@ public class ExpenseController {
 
         model.addAttribute("expenses", expenses);
         model.addAttribute("totalAmount", totalAmount);
-        ;
+        List<String> yourCategoriesList = List.of("Food", "Transport", "Others");
+        model.addAttribute("categories", yourCategoriesList);
+
 
         return "index";
 

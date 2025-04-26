@@ -8,6 +8,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* (your existing CSS, no changes needed) */
         body {
             background-color: #f8f9fa;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -89,17 +90,14 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 0.8rem 1rem;
         }
-
         .nav-link {
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-
         .nav-link:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
-
         .nav-link i {
             width: 20px;
             text-align: center;
@@ -118,7 +116,6 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4" style="border-radius: 0 0 10px 10px;">
         <div class="container">
-            <!-- Brand + Main Menu (left side) -->
             <div class="d-flex align-items-center">
                 <a class="navbar-brand me-4" href="/">
                     <i class="fas fa-wallet me-2"></i>Expense Tracker
@@ -138,12 +135,10 @@
                     </ul>
                 </div>
             </div>
-    
-            <!-- Profile Button (right side) -->
+
             <div class="d-flex align-items-center">
                 <div class="dropdown">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="profileDropdown" 
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle me-1"></i> Profile
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
@@ -156,13 +151,10 @@
                                     <i class="fas fa-sign-out-alt me-2"></i> Logout
                                 </button>
                             </form>
-                            </li>
+                        </li>
                     </ul>
                 </div>
-                
-                <!-- Mobile Toggle Button -->
-                <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#navbarMain">
+                <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -170,8 +162,16 @@
     </nav>
 
     <div class="container">
+        <!-- Filter Dropdown (NEW) -->
+        <div class="mb-4 d-flex justify-content-end">
+            <select id="categoryFilter" class="form-select w-auto">
+            <option value="all">All Categories</option>
+            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"></option>
+            </select>
+        </div>
+
         <div class="expense-table">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover mb-0" id="expenseTable">
                 <thead>
                     <tr>
                         <th>Description</th>
@@ -180,8 +180,8 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="expense : ${expenses}">
+                <tbody id="expenseTableBody">
+                    <tr th:each="expense : ${expenses}" th:data-category="${expense.category}">
                         <td th:text="${expense.description}">Description</td>
                         <td th:text="${expense.category}">Category</td>
                         <td th:text="'$' + ${expense.amount}">Amount</td>
@@ -196,7 +196,7 @@
                         </td>
                     </tr>
                     <tr th:if="${expenses.empty}">
-                        <td colspan="3" class="text-center py-4 text-muted">
+                        <td colspan="4" class="text-center py-4 text-muted">
                             No expenses found. Add your first expense!
                         </td>
                     </tr>
@@ -222,8 +222,6 @@
                 <h4 class="text-success mb-0" th:text="'$' + (${monthly_budget} - ${totalAmount})">$0.00</h4>
             </div>
         </div>
-        
-
 
         <div class="text-end">
             <a class="btn btn-success add-btn" href="/addExpense">
@@ -245,13 +243,25 @@
             // Smooth page transitions
             $('a').on('click', function(e) {
                 if ($(this).attr('href').startsWith('#')) return;
-                
                 e.preventDefault();
                 var link = $(this).attr('href');
                 $('body').removeClass('loaded');
                 setTimeout(function() {
                     window.location.href = link;
                 }, 500);
+            });
+
+            // Expense Category Filter (NEW)
+            $("#categoryFilter").on("change", function() {
+                var selectedCategory = $(this).val();
+                $("#expenseTableBody tr").each(function() {
+                    var rowCategory = $(this).data("category");
+                    if (selectedCategory === "all" || rowCategory === selectedCategory) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
             });
         });
     </script>
