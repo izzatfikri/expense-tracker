@@ -30,13 +30,11 @@ public class ExpenseController {
                 .map(expense -> expense.getAmount() != null ? expense.getAmount() : BigDecimal.ZERO)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        User currentUser = userService.findByUsername(
-                        SecurityContextHolder.getContext().getAuthentication().getName());
-                model.addAttribute("monthly_budget", currentUser.getMonthly_budget());
+        User currentUser = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
+        model.addAttribute("monthly_budget", currentUser.getMonthly_budget() != null ? currentUser.getMonthly_budget() : BigDecimal.ZERO);
         model.addAttribute("expenses", expenses);
         model.addAttribute("totalAmount", totalAmount);
-        ;
 
         return "index";
 
@@ -101,8 +99,6 @@ public class ExpenseController {
         return "redirect:/login?registered";
     }
 
-
-    // Test to update monthly budget
     @PostMapping("/updateBudget")
     public String updateBudget(@RequestParam("monthly_budget") Double monthly_budget) {
         User currentUser = userService.findByUsername(
