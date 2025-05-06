@@ -184,7 +184,7 @@
                     <tr th:each="expense : ${expenses}" th:data-category="${expense.category}">
                         <td th:text="${expense.description}">Description</td>
                         <td th:text="${expense.category}">Category</td>
-                        <td th:text="'$' + ${expense.amount}">Amount</td>
+                        <td th:text="'RM ' + ${expense.amount}">Amount</td>
                         <td>
                             <a class="btn btn-primary btn-sm action-btn me-1" th:href="@{/editExpense/{id}(id=${expense.id})}" title="Edit">
                                 <i class="fas fa-pencil-alt"></i>
@@ -209,17 +209,17 @@
             
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="text-muted mb-0">Monthly Budget</h5>
-                <h4 class="text-info mb-0" th:text="'$' + ${monthly_budget}">$0.00</h4>
+                <h4 class="text-info mb-0" th:text="'RM ' + ${monthly_budget}">$0.00</h4>
             </div>
         
             <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded" style="background-color: #e9f5ff;">
                 <h4 class="mb-0 fw-bold">Total Expenses</h4>
-                <h3 class="mb-0 text-primary" th:text="'$' + ${totalAmount}">$0.00</h3>
+                <h3 class="mb-0 text-primary" th:text="'RM ' + ${totalAmount}">$0.00</h3>
             </div>
         
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="text-muted mb-0">Remaining Budget</h5>
-                <h4 class="text-success mb-0" th:text="'$' + (${monthly_budget} - ${totalAmount})">$0.00</h4>
+                <h4 class="text-success mb-0" th:text="'RM ' + (${monthly_budget} - ${totalAmount})">$0.00</h4>
             </div>
         </div>
 
